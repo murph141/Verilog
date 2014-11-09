@@ -3,10 +3,11 @@ module alu(
   input [31:0] port_A,
   input [31:0] port_B,
   input [3:0] opcode,
-  output reg [31:0] out,
+  input clk,
+  output reg [31:0] result,
   output reg negative,
   output reg zero,
-  output reg overflow
+  output reg carry
 
   // Opcodes:
   // 0000 - Logical Shift Left A
@@ -20,11 +21,13 @@ module alu(
   // 1000 - Signed Add
   // 1001 - Signed Subtract
   //
-  // Flags have yet to be implemented!
+  // Overflow flag not yet implemented!
 
   );
 
-  always @ (port_A, port_B, opcode)
+  reg [32:0] out;
+
+  always @ (posedge clk)
   begin
 
     case(opcode)
@@ -49,13 +52,14 @@ module alu(
 
       9: out = port_A - port_B;
 
-      default: out <= 32'h0000;
+      default: out = 32'h0000;
 
     endcase
 
-    assign negative = 1'b0;
-    assign zero = 1'b0;
-    assign overflow = 1'b0;
+    result <= out[31:0];
+    negative <= out[31];
+    zero <= ~|out[31:0];
+    carry <= out[32];
 
   end
 
