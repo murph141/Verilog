@@ -19,6 +19,8 @@ module alu(
   // 0111 - NOR
   // 1000 - Signed Add
   // 1001 - Signed Subtract
+  //
+  // Flags have yet to be implemented!
 
   );
 

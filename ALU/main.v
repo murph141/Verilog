@@ -14,11 +14,19 @@ begin
   $dumpfile("test.vcd");
   $dumpvars(0, main);
 
-  A = 32'h5555AAAA;
-  B = 32'h44442222;
-  opcode = 4'h4;
+  A <= 32'h5555AAAA;
+  B <= 32'h44442222;
+  opcode <= 4'h4;
 
-  #5 $finish;
+  #5 A <= 32'h11112222;
+  B <= 32'h33334444;
+  opcode <= 4'h8;
+
+  #5 opcode <= 4'h5;
+  #5 opcode <= 4'h6;
+  #5 opcode <= 4'h7;
+
+  #10 $finish;
 end
 
 alu ALU(
