@@ -17,7 +17,8 @@ begin
   #10 reset = 0;
   #10 enable = 1;
   #100 enable = 0;
-  #5 $finish;
+  #20 enable = 1;
+  #50 $finish;
 end
 
 always #5 clock = ~clock;

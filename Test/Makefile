@@ -8,7 +8,8 @@ all: $V
 	$(COMPILE) -o $(FILE) $V
 
 clean:
-	@rm -f $(FILE)
+	@rm -f $(FILE) *.vcd
 
 run: all
-	vvp $(FILE)
+	@vvp $(FILE)
+	@gtkwave *.vcd
